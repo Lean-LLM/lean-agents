@@ -1,6 +1,6 @@
 # Lean Agents
 
-Copy the archive contents into your agent configuration directory, preserving the layout. Merge existing settings rather than overwriting unrelated configuration.
+Extract into your agent configuration directory. Keep the folder layout and preserve unrelated settings.
 
 ## Workflow
 
@@ -10,6 +10,8 @@ Copy the archive contents into your agent configuration directory, preserving th
 - `lean-reviewer` checks results independently; `lean-profiler` measures performance.
 - Follow up when evidence is missing, findings conflict, or checks fail; avoid redundant microtasks.
 
-The bundled legacy plugin filename is retained as a no-op to replace older tool-interception code. Existing model and reasoning choices stay with the runtime, apart from the bundled worker defaults.
+The legacy plugin file is now a no-op; it replaces older tool restrictions. Model and reasoning settings stay with the runtime except for worker defaults.
 
-Bundled skills: `code-fixing`, `code-optimization`, `java-reflection-optimization`. Load those relevant to the task.
+Code fixing, optimization, and Java reflection rules are part of the worker prompts; no separate skill loading is needed.
+
+When upgrading, manually delete old `skills/code-fixing`, `skills/code-optimization`, and `skills/java-reflection-optimization` from your agent configuration directory. Extracting an archive does not remove old folders.
