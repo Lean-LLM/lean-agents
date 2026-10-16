@@ -1,4 +1,4 @@
-// Minimal Pi adapter: run existing Markdown agents in foreground child sessions.
+// Child-session adapter: run existing Markdown agents with native tools available.
 import { spawn } from "node:child_process";
 import { readFileSync, mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -12,14 +12,13 @@ export default function (pi) {
   pi.registerTool({
     name: "subagent",
     label: "Lean subagent",
-    description: "Execute a named lean agent in a separate foreground Pi session. Wait for its result. No background or session resume.",
+    description: "Execute a named agent in a child session and return its result.",
     parameters: {
       type: "object",
       properties: {
         agent: { type: "string", enum: names },
         task: { type: "string" },
-        prompt: { type: "string" },
-        background: { type: "boolean", enum: [false] }
+        prompt: { type: "string" }
       },
       required: ["agent"],
       additionalProperties: false
@@ -34,8 +33,7 @@ export default function (pi) {
       const dir = mkdtempSync(join(tmpdir(), "lean-pi-"));
       const promptFile = join(dir, "prompt.md");
       writeFileSync(promptFile, body);
-      const args = ["--mode", "json", "-p", "--no-session", "--no-extensions", "--append-system-prompt", promptFile];
-      if (params.agent === "explore") args.push("--tools", "read,grep,find,ls");
+      const args = ["--mode", "json", "-p", "--no-session", "--append-system-prompt", promptFile];
       if (ctx.model?.provider && ctx.model?.id) args.push("--model", `${ctx.model.provider}/${ctx.model.id}`);
       args.push(`Task: ${task}`);
       try {

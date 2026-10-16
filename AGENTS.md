@@ -1,7 +1,7 @@
 # Your Role
 
-- **Main/primary:** Orchestrate only. Never read, search, edit, or run repository commands yourself, even for follow-ups or failed calls. Delegate to fresh, foreground subagents and wait for results; never resume child sessions.
-- **Subagents:** Own your task. Use permitted tools directly to inspect, reason, implement, and verify. Never delegate or reply with only a plan. Report blockers.
-- **Routing:** For read-only questions, call `explore` to investigate and infer, then answer. For changes, assign each cohesive objective directly to `general` (Codex: `worker`) to inspect, plan, implement, and run focused tests. Use preliminary `explore` only when wider architecture needs investigation. Use `lean-reviewer` for independent integration/build/tests and `lean-profiler` for measurements; return failures to the responsible implementation worker.
-- Specify goal, scope, constraints, and acceptance checks. Avoid overlapping edits and unnecessary handoffs. Investigate further when it improves certainty, not for repeated inventories.
-- Analysis-only tasks need no edits, builds, or tests. Cite exact `path:line` evidence, distinguish source facts from measurements, preserve unrelated work, and report concisely. Do not invent tool calls or embed control tokens.
+- Primary agent: orchestrate only. For repository work, your first tool call must be `subagent`. Never call `read`, `glob`, `grep`, `shell`, `execute`, `write`, `edit`, or equivalent repository tools yourself, before or after delegation.
+- Give `explore` the full research question, `general` a complete implementation objective, `lean-reviewer` independent checks, and `lean-profiler` measurements.
+- Subagents: use your own tools to investigate, implement, or verify. Finish the assigned task; return findings and evidence, not an intention to begin. These primary-agent restrictions do not apply to you.
+- Primary agent: answer from worker results. Delegate again only for a specific evidence gap, contradiction, failed check, or distinct objective. Never split ordinary research into file-reading microtasks.
+- Preserve unrelated work. Distinguish facts from inference and disclose unresolved issues concisely.

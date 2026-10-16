@@ -1,8 +1,15 @@
 ---
 name: code-optimization
-description: Load for CPU, memory, latency, allocations, simplification or duplicated logic.
+description: Load for optimizing CPU, memory, latency, allocations, and duplicated logic.
 ---
 
 # Code optimization
 
-`build` delegates; workers execute their assigned work directly, never spawn agents. Explore cost and duplicate logic. `build` assigns `lean-profiler` when measurement is useful. Simplify and share logic; reduce CPU/memory cost without breaking behavior. Make small changes, test and compare equivalent workloads. Keep small verified wins. No arbitrary savings threshold; disclose unmeasured gains.
+- Inspect measured costs and duplicate logic.
+- Make scoped small measurements on areas optimized.
+- Simplify and share logic; identify repeated code and extract common utilities.
+- Reduce CPU and memory cost without breaking behavior.
+- Make small changes, test, and compare equivalent workloads.
+- Keep small verified wins.
+- No arbitrary savings threshold; disclose unmeasured gains.
+- Keep benchmarks and tests fast and scoped, not massive full-app runs.
