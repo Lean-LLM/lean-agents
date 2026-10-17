@@ -3,7 +3,7 @@
 Extract into your agent configuration directory. Preserve layout and unrelated settings.
 
 - `build`: delegate tasks and verify completion.
-- `general` / `lean-general`: implement and test scoped changes.
+- `general`: implement and test scoped changes.
 - `explore` / `lean-explore`: locate code with bounded reads and line evidence.
 - `lean-reviewer` / `lean-profiler`: independent checks and measurements.
 
