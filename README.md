@@ -1,17 +1,14 @@
 # Lean Agents
 
-Extract into your agent configuration directory. Keep the folder layout and preserve unrelated settings.
+Extract into your agent configuration directory, preserving the folder layout and unrelated settings.
 
-## Workflow
+- `build`: primary coordinator, delegates complete tasks and verifies results.
+- `explore`: targeted source investigation.
+- `general`: implementation and focused tests.
+- `lean-reviewer`: independent checks; `lean-profiler`: scoped measurements.
 
-- `build` delegates and consolidates complete objectives.
-- `explore` investigates source and returns evidence-backed answers.
-- `general` inspects, plans, implements and tests cohesive changes.
-- `lean-reviewer` checks results independently; `lean-profiler` measures performance.
-- Follow up when evidence is missing, findings conflict, or checks fail; avoid redundant microtasks.
+Keep `AGENTS.md` for shared rules. Orchestrator-only rules live in `agents/build.md`, not in shared memory. `mods/lean-primary.ts` is a small Command Code loader for that same prompt: it injects only when the native `agent` delegation tool is available. It does not define extra workers or block tools. In Command Code, built-in `explore`/`general` are reserved names, so those built-in workers are used instead of replacing them.
 
-The legacy plugin file is now a no-op; it replaces older tool restrictions. Model and reasoning settings stay with the runtime except for worker defaults.
+Use exact files or narrow searches, stop when evidence is sufficient, and continue with focused work if the task is not verified. No separate skills are required: code-fixing, optimization and Java-reflection guidance lives in worker prompts.
 
-Code fixing, optimization, and Java reflection rules are part of the worker prompts; no separate skill loading is needed.
-
-When upgrading, manually delete old `skills/code-fixing`, `skills/code-optimization`, and `skills/java-reflection-optimization` from your agent configuration directory. Extracting an archive does not remove old folders.
+When upgrading, remove old `skills/code-fixing`, `skills/code-optimization`, and `skills/java-reflection-optimization` folders if present. Older Command Code installs may also have a duplicate `commandcode/` subtree and `lean-*` workers; they are not needed. This archive does not delete installed files.
