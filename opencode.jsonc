@@ -7,8 +7,7 @@
       "tokens": 15000
     }
   },
-  "plugin": [
-    "@slkiser/opencode-quota@latest"
-  ],
-  "plugins": []
+  "plugins": [
+    "@slkiser/opencode-quota@5.0.3"
+  ]
 }

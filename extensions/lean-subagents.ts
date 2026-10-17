@@ -6,7 +6,7 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const home = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const names = ["explore", "general", "lean-reviewer", "lean-profiler"];
+const names = ["explore", "lean-explore", "general", "lean-reviewer", "lean-profiler"];
 
 export default function (pi) {
   pi.registerTool({
