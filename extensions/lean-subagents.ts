@@ -6,13 +6,13 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const home = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const names = ["explore", "lean-explore", "general", "lean-reviewer", "lean-profiler"];
+const names = ["general"];
 
 export default function (pi) {
   pi.registerTool({
     name: "subagent",
     label: "Lean subagent",
-    description: "Execute a named agent in a child session and return its result.",
+    description: "Run one CODER (general) in a foreground child session and await its result.",
     parameters: {
       type: "object",
       properties: {

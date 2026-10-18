@@ -1,4 +1,4 @@
-// Command Code bridge. Uses the shared build prompt; no duplicate agent definitions.
+// Command Code: inject only the primary ORCHESTRATOR role. Shared policy is AGENTS.md.
 import { readFileSync } from 'node:fs';
 
 const prompt = readFileSync(new URL('../agents/build.md', import.meta.url), 'utf8')
@@ -8,8 +8,7 @@ const prompt = readFileSync(new URL('../agents/build.md', import.meta.url), 'utf
 export default function (cmd: { getActiveTools(): readonly string[]; hooks(h: { appendSystemPrompt(): string | undefined }): void }) {
   cmd.hooks({
     appendSystemPrompt() {
-      // Workers do not have Command Code's agent delegation tool.
-      // Never inject the primary role into worker prompts.
+      // Command Code removes agent delegation from workers; never inject a primary role there.
       return cmd.getActiveTools().includes('agent') ? prompt : undefined;
     },
   });
