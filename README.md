@@ -7,7 +7,7 @@
 | `ORCHESTRATOR` | Default primary (`build`) | One task: executes directly. Two or more independent deliverables: delegate to subagents first, foreground, no direct repository reads. |
 | `CODER` | Assigned worker | Investigates, edits, tests and repairs within scope; can accept read-only audit/verification jobs. Never delegates. |
 
-**Actual worker names:** `general` (OpenCode, Command Code, Pi), `worker` (Codex). `CODER` is a logical role sent in the assignment, not necessarily a registered tool identifier. Preserve the exact proven line in `AGENTS.md`. For overlapping files and shared build outputs, serialize operations. A version bump, a bug fix, and a startup-message change are three requested deliverables; testing the fix is not a fourth.
+**Actual worker names:** `general` (OpenCode, Command Code, Pi), `worker` (Codex). `CODER` is a logical role sent in the assignment, not necessarily a registered tool identifier. Preserve the exact proven line in `AGENTS.md`. For overlapping files and shared build outputs, serialize operations. Count independent work scopes, not checklist items. Tests and release metadata required for a fix belong to that fix; delegate separate outcomes only when their edits and verification can be coordinated safely.
 
 ## Bundled task-scoped skills
 
@@ -15,7 +15,7 @@
 - **`lean-java`**: `skills/lean-java/SKILL.md`. Trigger: "Load lean-java when working on Java/JVM projects." Covers Java, Maven/Gradle, JUnit, concurrency, Spring, JVM diagnostics, safe performance and compatibility. Java+web projects also load lean-web; Java-only projects do not.
 - **`lean-web`**: `skills/lean-web/SKILL.md`. Trigger: "Load lean-web when working on web or Node.js projects." Covers JS/TS, HTML/CSS, React/Next.js, async Node, Fastify, APIs, Better Auth/OAuth, ESLint, Turbo, tests, performance. Framework-specific sections apply only when the corresponding stack is present.
 
-For **one coding task**, the primary executing agent loads `lean-code` and only the relevant stack skill(s). For **2+ independent coding tasks**, delegate first; give each CODER `lean-code` plus the relevant stack skill path(s) in its handoff, without reading the skills as ORCHESTRATOR. Paths resolve from the repo root; if automatic skill discovery is unavailable, explicitly read the indicated file. Native skill installation can additionally expose each skill through the host's skills directory. Avoid loading both stack skills for a single-stack task; `lean-code` always applies to coding tasks.
+Before you start, load all relevant skills to this task and workspace. The executing agent loads skills appropriate to its task and workspace, including any bundled skills. Use the skill paths above when automatic discovery is unavailable. Delegation briefs stay compact.
 
 `lean-web` condenses four supplied standalone source skills (Vercel React best practices, Vercel composition patterns, Better Auth, Turborepo) and the 11 skill definitions/rule sets supplied in `skills-main (1).zip` (Node, Fastify, OAuth, TypeScript, ESLint, Node internals, documentation and specialized tooling); unrelated specialist guidance is conditional, not the default workflow. It is a task-focused paraphrase, not an exact upstream documentation bundle. API details should be checked against the installed versions. `lean-java` retains the Java guidance from v13, with overlapping web-specific rules now centralized in `lean-web`.
 
@@ -29,6 +29,8 @@ Install `AGENTS.md` at the repository root (or in the platform's supported globa
 
 - Copy `agents/build.md` and `agents/general.md` to `.opencode/agents/` or `~/.config/opencode/agents/`. Set the default primary using the supplied `opencode.jsonc` or merge its `default_agent: "build"` into your existing config.
 - The actual subagent is `general`; dispatch with a bounded `Role: CODER` instruction. Foreground means wait for its result; do not set `background: true`. A saved session may retain its prior primary.
+- The bundled config uses V2 `permissions`/`agents`: denies `question`, `todowrite`, and `codesearch` actions when available; allows `build` to delegate only to `general`; prohibits recursive `general` delegation; and denies edit/delegation/websearch for the built-in `explore` role. Web fetching remains allowed. Apply as a merge into your own config; do not overwrite unrelated user permissions.
+- V2 compaction keeps `auto: true` and `keep.tokens: 15000`; `compaction.prune` is legacy and ignored in V2. `lsp` and `doom_loop` are not current V2 Core permission actions, so those denials were not carried over. Denied tools only save tokens when they would otherwise be called. The additional V2 `tool_output` cap (300 lines/16,000 bytes per result) bounds unexpected dumps; keep full test logs on disk and inspect narrowed portions when needed. This reduces model-visible output only when the cap is reached; it is not a demonstrated billing reduction.
 
 ### Claude Code
 

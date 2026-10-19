@@ -7,6 +7,76 @@
       "tokens": 15000
     }
   },
+  "tool_output": {
+    "max_lines": 300,
+    "max_bytes": 16000
+  },
+  "permissions": [
+    {
+      "action": "question",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "todowrite",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "codesearch",
+      "resource": "*",
+      "effect": "deny"
+    }
+  ],
+  "agents": {
+    "build": {
+      "permissions": [
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "subagent",
+          "resource": "general",
+          "effect": "allow"
+        },
+        {
+          "action": "question",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    },
+    "general": {
+      "permissions": [
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    },
+    "explore": {
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "websearch",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    }
+  },
   "plugins": [
     "@slkiser/opencode-quota@5.0.3"
   ]
