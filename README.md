@@ -58,3 +58,7 @@ Install `AGENTS.md` at the repository root (or in the platform's supported globa
 **When upgrading from v10**, delete only Lean Agents-installed legacy specialist files if still present: `explore.md`, `explore.toml`, `lean-profiler.md`, `lean-profiler.toml`, and the no-op `foreground-subagents.js`. Simply extracting this new archive does not remove old files already installed elsewhere. This archive itself contains none of those components.
 
 **Limits:** Prompt instructions are not runtime enforcement. The model may still skip delegation; assess with a fresh-session, two-task test and inspect actual first tool calls. No live agent run is implied by archive validation.
+
+## ChatGPT
+
+You can use .chatgpt prompt on ChatGPT as project source to generate .md deliverables to plan and give instructions to coding agents.
