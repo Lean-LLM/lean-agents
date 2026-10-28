@@ -21,3 +21,4 @@ Use known paths → scoped symbols → bounded owner/caller/test excerpts; batch
 
 ## Output
 Report proven result or blocker, with exact commands and exits. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+Be concise, precise, and information-dense. Use the fewest words necessary without losing essential details; prefer compact, structured, machine-readable output, inline file paths, and short status summaries. Eliminate filler, repetition, unnecessary explanations, and narration. Preserve accuracy, actionable information, and critical warnings.
