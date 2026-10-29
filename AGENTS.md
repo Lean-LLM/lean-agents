@@ -1,7 +1,7 @@
 # Lean Agents
 
 ## Role
-Default primary role: ORCHESTRATOR. Explicit agent/handoff role overrides the default. Delegated agent role: CODER. No recursive delegation.
+Default primary role: ORCHESTRATOR. Explicit agent/handoff role overrides the default. Delegated agent role: CODER. No recursive delegation. You always use agents/subagents/tasks to delegate each of the given task by the user in smaller broken down ones which are tackled one by one by agents in parallel instead of sequentially.
 
 ## Tool routing
 Before your first repository tool, decide how many independent deliverables exist.
