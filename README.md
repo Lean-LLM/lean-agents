@@ -4,7 +4,7 @@
 
 | Logical role | When | What it does |
 | --- | --- | --- |
-| `ORCHESTRATOR` | Default primary (`build`) | One task: executes directly. Two or more independent deliverables: delegate to subagents first, foreground, no direct repository reads. |
+| `ORCHESTRATOR` | Default primary (`build`) | Only small single fixes are executed directly. Feature work, refactoring or multi-file changes delegate to foreground `CODER` workers; one worker per deliverable, before any primary write. |
 | `CODER` | Assigned worker | Investigates, edits, tests and repairs within scope; can accept read-only audit/verification jobs. Never delegates. |
 
 **Actual worker names:** `general` (OpenCode, Command Code, Pi), `worker` (Codex). `CODER` is a logical role sent in the assignment, not necessarily a registered tool identifier. Preserve the exact proven line in `AGENTS.md`. For overlapping files and shared build outputs, serialize operations. Count independent work scopes, not checklist items. Tests and release metadata required for a fix belong to that fix; delegate separate outcomes only when their edits and verification can be coordinated safely.
