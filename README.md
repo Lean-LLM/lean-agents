@@ -10,7 +10,7 @@ No speed or token savings are claimed. See `BENCHMARK.md` for the tests so far.
 
 | Role | Who | Does |
 | --- | --- | --- |
-| `ORCHESTRATOR` | Primary agent (`build`) | Does the work itself by default. Big independent tasks (many files, long runs) go to a worker, one each. |
+| `ORCHESTRATOR` | Primary agent (`build`) | Small single fixes itself. Features, refactors and multi-file work go to a worker, one per independent task. |
 | `CODER` | Worker (`general`, or `worker` on Codex) | Investigates, edits, tests, repairs inside its scope. Never delegates. |
 
 Up to 10 workers run in parallel on independent tasks; the primary waits for all. Agents never ask the user questions; they resolve things themselves. Delete the `## Questions` section in `AGENTS.md` if you want questions back.
