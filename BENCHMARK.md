@@ -54,3 +54,28 @@ Orchestrator-reported tokens / time / tool calls. Worker tokens are not reported
 | "Delegate only when big" (2 runs) | 47.6-48.0k | 57-58s | 5 | 6/6 pass, did it inline |
 
 Reading: delegating small tasks costs more and is slower. Each worker re-pays ~40k of context. AGENTS.md now says to delegate only big tasks. Not tested: a truly big task where delegation might win. No savings claimed.
+
+## Round 9: real token traces (opencode, open-design/deepseek-v4.1-flash)
+
+Task: vague bug-fix brief on the shop lib (`task4.txt`), 4 bugs + 3 missing features, hidden accept tests. Each run is a fresh session with the variant as `AGENTS.md`. Tokens come from the run's step records, so reasoning is counted. "Fresh" = in + out + reasoning (cache reads excluded). Runs with provider errors are dropped. Time is inflated by up to 10 parallel runs; compare rows, not absolutes. Spread is large (±5 to ±23k), n is small.
+
+| variant | n | pass | in | out | reasoning | fresh | cache read | steps | tools | time s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| no prompt | 8 | 8/8 | 32.0k | 5.6k | 10.1k | 47.7k | 666k | 25 | 28 | 272 |
+| previous AGENTS.md | 4 | 4/4 | 23.0k | 4.3k | 5.7k | 33.0k | 251k | 15 | 22 | 113 |
+| A: 280B "think little" | 7 | 7/7 | 12.7k | 2.9k | 3.4k | 19.1k | 130k | 11 | 13 | 101 |
+| B: A + do it yourself | 3 | 3/3 | 16.1k | 4.0k | 5.5k | 25.7k | 159k | 12 | 18 | 141 |
+| M: old + terse edits | 4 | 4/4 | 23.6k | 4.3k | 5.2k | 33.2k | 338k | 17 | 24 | 158 |
+| Q: M without ADHD | 4 | 4/4 | 17.0k | 5.0k | 7.2k | 29.3k | 327k | 21 | 25 | 192 |
+| R: Q without skills line | 4 | 4/4 | 25.2k | 5.5k | 9.5k | 40.2k | 519k | 23 | 24 | 194 |
+| T: slim 0.9KB (now AGENTS.md) | 4 | 4/4 | 16.2k | 3.5k | 5.9k | 25.5k | 164k | 12 | 16 | 128 |
+
+Reading:
+- Quality equal: every kept run passed all tests.
+- Short prompts use fewer tokens, fewer reasoning tokens and fewer steps than none or the long one. A is best (-60% fresh vs no prompt, -42% vs previous) but has no routing or questions rules. T keeps them: -47% vs no prompt, -23% vs previous.
+- Adding terse wording to the long prompt (M, Q, R) did not help. Prompt length seems to matter more than wording.
+- ADHD section dropped from the shipped `AGENTS.md` (T). Not tested on its own.
+- Round 8 and the big-task runs (3 modules): delegating small and mid tasks was slower with no gain.
+- Not tested: other models, much bigger tasks. Savings are on this task only.
+
+Raw data and scripts: `.mocks/` (ignored).
