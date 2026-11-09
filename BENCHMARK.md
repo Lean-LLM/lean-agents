@@ -116,3 +116,17 @@ Same vague task, model and method as round 9. More runs of A, plus two new varia
 | U: A + questions line | 4 | 4/4 | 47.4k ±17.7 | 10.1k | 24 | 156 |
 
 Reading: A's earlier 19k was luck. At n=11 A equals T (about 25k). So T is not worse than A and keeps the routing and questions rules. U shows one extra line can wipe out the gain, so results move a lot with small wording changes and with run luck; any claim under n~10 is weak. We stop here: the shipped prompt is about 47% below no prompt (47.7k to ~25k) on vague tasks, no gain on exact-spec tasks, quality equal.
+
+## Round 13: delegating prompts (opencode, deepseek-v4.1-flash, vague shop task)
+
+Orchestrator (`build`) + `general` worker. Tokens summed over the whole session tree. Fresh = in + out + reasoning. Score /100 = quality 40 + delegation kept 20 + tokens 25 + speed 15 (targets: 60% of the original's tokens and time).
+
+| variant | n | pass | fresh | reasoning | time s | score |
+|---|---|---|---|---|---|---|
+| original (3.7KB) | 5 | 5/5 | 48.4k | 8.3k | 218 | 84 |
+| TD: short delegating (1.1KB, now `AGENTS.md`) | 6 | 6/6 | 50.5k | 8.6k | 225 | 83 |
+| Caveman-style output rules | 6 | 6/6 | 64.1k | 14.2k | 250 | 79 |
+| 150-word thinking budget | 6 | 6/6 | 47.1k | 6.6k | 200 | 85 |
+| 5-word drafts | 3 | 3/3 | 45.5k | 9.1k | 156 | 89 |
+
+Reading: no tested wording beat the original beyond noise (n<=6, spread +-5 to +-27k). Early wins at n=3 flipped at n=6. The short prompt equals the original in tokens, speed and quality and is 70% smaller, with delegation kept. Reasoning is only ~15% of tokens; the rest is input, mostly the brief and the worker's own context. Not tested: other models, tasks big enough for several parallel workers.
