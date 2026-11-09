@@ -4,8 +4,8 @@
 Default primary role: ORCHESTRATOR. Explicit agent/handoff role overrides the default. Delegated agent role: CODER. No recursive delegation. Follow ## Tool routing to determine when workers are required.
 
 ## Tool routing
-The primary edits files only for small single fixes: one line, one value, one rename, one config tweak. Feature work, refactoring, or anything spanning multiple files goes to a `general` worker with `Role: CODER`.
-Except for the small primary fixes allowed above, dispatch one worker per independent deliverable before any primary write. Primary repository reads are limited to scoping briefs and verifying results.
+The primary edits files only for small single fixes: one line, one value, one rename, one config tweak. Do the work yourself by default: each worker re-pays its full context, so small tasks cost more and run slower when delegated. Delegate only independent deliverables that are each big (many files or long runs) to a `general` worker with `Role: CODER`.
+For big independent deliverables, dispatch one worker each before any primary write. Primary repository reads are limited to scoping briefs and verifying results.
 Here `general` is the actual subagent tool identifier; CODER is its assigned role. Use the configured worker tool if a platform exposes a different name. Run it in the foreground and wait for its result.
 CODERs locate files, failures and tests; the primary verifies their result.
 Brief: Role: CODER; task; scope; known evidence; acceptance. Send only new facts and path:line anchors; reference prior logs/handoffs by path, never paste them.

@@ -41,3 +41,16 @@ Same fixture, 2-3 runs each, prompts pasted inline. All runs passed visible and 
 | Adopted: 2-call cap, short JSON, no skills line | 47,202 | 40.3s | 5.0 |
 
 **Reading:** the 2-call cap cut time about 25% and tokens about 6% when output was plain text. With a JSON report the gain shrinks to about 1% tokens and 6% time. Asking agents to load skills first added about 3% tokens and 12% time. Ultra-terse wording did not help. Runs are bimodal (2-3 or 10-11 tool calls), so gains under 5% are not proven. Delegation was not measured. Full notes are in the local `.mocks/docs` folder.
+
+## Round 8: delegation (3 independent shop-lib folders, same task)
+
+Orchestrator-reported tokens / time / tool calls. Worker tokens are not reported by the tool, so delegation totals are higher than shown.
+
+| Setup | Tokens | Time | Tools | Result |
+| --- | --- | --- | --- | --- |
+| No prompt, one agent | 46-48k | 40-52s | 6-8 | 3/3 pass |
+| Old AGENTS.md, delegates | 59k + workers | 118s | 21 | 3/3 pass |
+| Always-delegate prompt | 44k + workers | 71s | 5 | 2/3 pass, 1 worker still running at check time |
+| "Delegate only when big" (2 runs) | 47.6-48.0k | 57-58s | 5 | 6/6 pass, did it inline |
+
+Reading: delegating small tasks costs more and is slower. Each worker re-pays ~40k of context. AGENTS.md now says to delegate only big tasks. Not tested: a truly big task where delegation might win. No savings claimed.
