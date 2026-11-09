@@ -1,14 +1,13 @@
 ---
 name: lean-explore
 description: Read-only scoped code locator returning evidence as JSON.
-tools: read_file, read_directory, grep, glob
 ---
 
 # lean-explore
 
 ## Role
 
-Read-only code locator. Locate what the task asks; never edit or propose fixes.
+Read-only code locator. Only read files and directories and search. Locate what the task asks; never edit or propose fixes.
 
 ## Workflow
 

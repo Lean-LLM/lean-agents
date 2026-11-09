@@ -11,7 +11,7 @@
 
 ## Bundled task-scoped skills
 
-- **`lean-code`**: `skills/lean-code/SKILL.md`. Trigger: "Load lean-code for all coding-related tasks." Always load for implementation, fixes, code review, tests and refactoring. It compresses Ponytail's smallest-complete-change rules into a <1,000-character core, then adds a mandatory post-implementation simplification pass, real-duplication removal, and safe inheritance/composition guidance. Code reviews suggest improvements without editing. Source inspiration: the user-provided `ponytail-main(1).zip` (Ponytail; MIT).
+- **`lean-code`**: `skills/lean-code/SKILL.md`. Trigger: "Load lean-code for all coding-related tasks." Always load for implementation, fixes, code review, tests and refactoring. It applies smallest-complete-change rules, then adds a mandatory post-implementation simplification pass, real-duplication removal, and safe inheritance/composition guidance. Code reviews suggest improvements without editing.
 - **`lean-java`**: `skills/lean-java/SKILL.md`. Trigger: "Load lean-java when working on Java/JVM projects." Covers Java, Maven/Gradle, JUnit, concurrency, Spring, JVM diagnostics, safe performance and compatibility. Java+web projects also load lean-web; Java-only projects do not.
 - **`lean-web`**: `skills/lean-web/SKILL.md`. Trigger: "Load lean-web when working on web or Node.js projects." Covers JS/TS, HTML/CSS, React/Next.js, async Node, Fastify, APIs, Better Auth/OAuth, ESLint, Turbo, tests, performance. Framework-specific sections apply only when the corresponding stack is present.
 
@@ -27,10 +27,9 @@ Install `AGENTS.md` at the repository root (or in the platform's supported globa
 
 ### OpenCode v2
 
-- Copy `agents/build.md` and `agents/general.md` to `.opencode/agents/` or `~/.config/opencode/agents/`. Set the default primary using the supplied `opencode.jsonc` or merge its `default_agent: "build"` into your existing config.
+- Copy `agents/build.md` and `agents/general.md` to `.opencode/agents/` or `~/.config/opencode/agents/`. Set `default_agent: "build"` in your config.
 - The actual subagent is `general`; dispatch with a bounded `Role: CODER` instruction. Foreground means wait for its result; do not set `background: true`. A saved session may retain its prior primary.
-- The bundled config uses V2 `permissions`/`agents`: denies `question`, `todowrite`, and `codesearch` actions when available; allows `build` to delegate only to `general`; prohibits recursive `general` delegation; and denies edit/delegation/websearch for the built-in `explore` role. Web fetching remains allowed. Apply as a merge into your own config; do not overwrite unrelated user permissions.
-- V2 compaction keeps `auto: true` and `keep.tokens: 15000`; `compaction.prune` is legacy and ignored in V2. `lsp` and `doom_loop` are not current V2 Core permission actions, so those denials were not carried over. Denied tools only save tokens when they would otherwise be called. The additional V2 `tool_output` cap (300 lines/16,000 bytes per result) bounds unexpected dumps; keep full test logs on disk and inspect narrowed portions when needed. This reduces model-visible output only when the cap is reached; it is not a demonstrated billing reduction.
+- Questions: `AGENTS.md` tells agents not to ask the user questions and to resolve things themselves. Remove its `## Questions` section if you want checkpoints.
 
 ### Claude Code
 
@@ -57,7 +56,11 @@ Install `AGENTS.md` at the repository root (or in the platform's supported globa
 
 **When upgrading from v10**, delete only Lean Agents-installed legacy specialist files if still present: `explore.md`, `explore.toml`, `lean-profiler.md`, `lean-profiler.toml`, and the no-op `foreground-subagents.js`. Simply extracting this new archive does not remove old files already installed elsewhere. This archive itself contains none of those components.
 
-**Limits:** Prompt instructions are not runtime enforcement. The model may still skip delegation; assess with a fresh-session, two-task test and inspect actual first tool calls. No live agent run is implied by archive validation.
+**Limits:** Prompt instructions are not runtime enforcement. The model may still skip delegation. No speed or token savings are claimed; see `BENCHMARK.md`.
+
+## License
+
+MIT, see `LICENSE`.
 
 ## ChatGPT
 

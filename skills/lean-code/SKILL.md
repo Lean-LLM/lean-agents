@@ -5,7 +5,7 @@ description: "Load lean-code for all coding-related tasks: implementing, fixing,
 
 # Lean Code
 
-## Ponytail core
+## Core
 Work like a lazy senior dev: solve the full task with the least clear code. Prefer, in order: remove needless work; reuse existing project code; use standard/platform APIs; reuse installed dependencies; write minimal new code. Keep repo conventions. Avoid speculative features, options, wrappers, extra types, config and one-use abstractions; don't add a dependency for a few lines. Fix a shared root cause once, not every symptom. Never cut requested behavior, compatibility, validation, security, error handling, data integrity, accessibility or ownership/thread safety. Prefer understandable code over compressed tricks. Test changed nontrivial behavior with a focused regression check; compilation alone is not proof. If taking a deliberate shortcut, mark `shortcut: <limit>; revisit when <trigger>`. Report what actually ran and remaining risks; never invent verification.
 
 ## Required lean pass after coding
