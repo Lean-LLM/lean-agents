@@ -143,3 +143,5 @@ Opencode providers were out of funds, so this round used devin. Its export count
 | W5: V7 + "verify once, do not re-read worker files" (now `AGENTS.md`) | 20 | 20/20 | 18.6k | 1.9k | 17/20 | 38 |
 
 Reading: TD is cheap but often skips the worker (4/10). W5 keeps the worker (17/20) and uses 17% fewer orchestrator tokens than TD, 21% fewer than V7. Lost: shorter brief (delegation 2/10), worker call cap (5/10), batch line (6/10). Worker tokens not measured; the 12k target is not reached.
+
+Output tokens over the whole devin session (all assistant messages incl. worker, from devin's session DB `num_tokens`; input side not recorded for workers): original 15.7k (n=11), TD 13.2k (10), V7 15.6k (20), W5 13.3k (20). W5 is 16% below the original; it is equal to TD within noise (spread about +-3k) but delegates far more often. Worker input tokens are still unmeasured.
