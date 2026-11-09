@@ -26,3 +26,18 @@ All three fixed the bug and passed tests. Same fix in each.
 | D | 5-line coder prompt | 47,827 / 47,755 | 47,791 | 59.2s | pass |
 
 **Reading:** all 6 runs correct. Spread inside a variant (up to 3k tokens, 21s) is as big as the gap between variants. No prompt beat no prompt. Agents did the work themselves, so delegation savings were not tested. Only proven saving: `AGENTS.md` is 25% smaller than before (4,891 → 3,665 bytes), which is a per-session input saving, not a task saving.
+
+## Rounds 3-7: prompt variants for the CODER
+
+Same fixture, 2-3 runs each, prompts pasted inline. All runs passed visible and hidden tests.
+
+| Variant | Avg tokens | Avg time | Tool uses |
+| --- | --- | --- | --- |
+| No prompt | 47,770 | 43.0s | 8 |
+| Old-style `AGENTS.md` | 48,079 | 44.7s | 7.5 |
+| Terse thinking | 46,422 | 36.1s | 6.5 |
+| Terse + max 2 calls before first edit | 45,052 | 31.9s | 2.7 |
+| Ultra-terse | 49,026 | 47.0s | 13 |
+| Adopted: 2-call cap, short JSON, no skills line | 47,202 | 40.3s | 5.0 |
+
+**Reading:** the 2-call cap cut time about 25% and tokens about 6% when output was plain text. With a JSON report the gain shrinks to about 1% tokens and 6% time. Asking agents to load skills first added about 3% tokens and 12% time. Ultra-terse wording did not help. Runs are bimodal (2-3 or 10-11 tool calls), so gains under 5% are not proven. Delegation was not measured. Full notes are in the local `.mocks/docs` folder.

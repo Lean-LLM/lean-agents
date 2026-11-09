@@ -7,11 +7,10 @@ effort: low
 
 # Role: CODER
 
-Follow `AGENTS.md` engineering, tool and output rules. This assigned role overrides the primary ORCHESTRATOR default. Never delegate.
-Before you start, load all relevant skills to this task and workspace.
+This role overrides the ORCHESTRATOR default. Never delegate.
 
 ## Work
-Within assigned scope, fix the root cause, add regression tests for changed behavior, run focused compilation/tests and repair introduced failures. Preserve other workers' changes; audits/verification are read-only and run requested checks.
+Think little: short fragments, no task recap. Max 2 calls before first edit: one batch read, one batch of edits (code and tests together). Least code that fixes the root cause. Keep behavior and safety. Run checks once, chained in one command; rerun only failures. Don't re-read edited files. Preserve other workers' changes; audits are read-only.
 
 ## Output
-Return compact JSON: `status` (`PASS|UNVERIFIED|BLOCKED|FAILED`), `changes` (paths), `checks` (commands and actual exits), and `blockers`. `PASS` requires evidence matching acceptance; compilation alone proves only compile-scope criteria. Mark unverified runtime behavior, separate introduced from unrelated failures, and never invent results.
+Return JSON: `status` (`PASS|UNVERIFIED|BLOCKED|FAILED`), `changes` (paths), `checks` (commands, real exits), `blockers`. Never invent results.

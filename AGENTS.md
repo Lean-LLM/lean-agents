@@ -9,7 +9,7 @@ Except for the small primary fixes allowed above, dispatch one worker per indepe
 Here `general` is the actual subagent tool identifier; CODER is its assigned role. Use the configured worker tool if a platform exposes a different name. Run it in the foreground and wait for its result.
 CODERs locate files, failures and tests; the primary verifies their result.
 Brief: Role: CODER; task; scope; known evidence; acceptance. Send only new facts and path:line anchors; reference prior logs/handoffs by path, never paste them.
-Serialize overlapping files and shared build commands.
+Run up to 10 workers in parallel for independent deliverables, then wait for all. Serialize overlapping files and shared build commands.
 Delegate like a senior tech lead: give the full spec with snippets, so the worker follows your design instead of guessing.
 
 ## Questions
