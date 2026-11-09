@@ -74,8 +74,20 @@ Reading:
 - Quality equal: every kept run passed all tests.
 - Short prompts use fewer tokens, fewer reasoning tokens and fewer steps than none or the long one. A is best (-60% fresh vs no prompt, -42% vs previous) but has no routing or questions rules. T keeps them: -47% vs no prompt, -23% vs previous.
 - Adding terse wording to the long prompt (M, Q, R) did not help. Prompt length seems to matter more than wording.
-- ADHD section dropped from the shipped `AGENTS.md` (T). Not tested on its own.
+- ADHD and Engineering sections dropped from the shipped `AGENTS.md` (T). Tested on their own in round 10.
 - Round 8 and the big-task runs (3 modules): delegating small and mid tasks was slower with no gain.
 - Not tested: other models, much bigger tasks. Savings are on this task only.
 
 Raw data and scripts: `.mocks/` (ignored).
+
+## Round 10: shipped prompt re-run, and the dropped sections tested alone
+
+Same task, model and method as round 9. 9 sessions in parallel; failed provider runs dropped.
+
+| variant | n | pass | in | out | reasoning | fresh | cache read | steps | tools | time s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| T (shipped), re-run | 3 | 3/3 | 14.1k | 3.2k | 7.2k | 24.4k | 156k | 12 | 12 | 128 |
+| T + ADHD section | 3 | 3/3 | 28.0k | 6.1k | 9.8k | 43.9k | 565k | 23 | 28 | 180 |
+| T + Engineering section | 2 | 2/2 | 30.8k | 4.7k | 8.0k | 43.4k | 454k | 22 | 27 | 166 |
+
+Reading: the shipped prompt holds (24-25k, same as round 9, n=7 total). Each dropped section made the run use about 75-80% more fresh tokens, about 2x steps, and slower, with the same pass rate. Both stay out. Small n; ADHD spread is wide (±21k). Not tested: other models, bigger tasks.
