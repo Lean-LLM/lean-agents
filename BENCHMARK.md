@@ -50,7 +50,7 @@ Orchestrator-reported tokens / time / tool calls. Worker tokens are not reported
 | --- | --- | --- | --- | --- |
 | No prompt, one agent | 46-48k | 40-52s | 6-8 | 3/3 pass |
 | Old AGENTS.md, delegates | 59k + workers | 118s | 21 | 3/3 pass |
-| Always-delegate prompt | 44k + workers | 71s | 5 | 2/3 pass, 1 worker still running at check time |
+| Always-delegate prompt | 50k + workers | 33 min | 8 | 3/3 pass after one worker was stopped and rerun |
 | "Delegate only when big" (2 runs) | 47.6-48.0k | 57-58s | 5 | 6/6 pass, did it inline |
 
 Reading: delegating small tasks costs more and is slower. Each worker re-pays ~40k of context. AGENTS.md now says to delegate only big tasks. Not tested: a truly big task where delegation might win. No savings claimed.
