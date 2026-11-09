@@ -130,3 +130,16 @@ Orchestrator (`build`) + `general` worker. Tokens summed over the whole session 
 | 5-word drafts | 3 | 3/3 | 45.5k | 9.1k | 156 | 89 |
 
 Reading: no tested wording beat the original beyond noise (n<=6, spread +-5 to +-27k). Early wins at n=3 flipped at n=6. The short prompt equals the original in tokens, speed and quality and is 70% smaller, with delegation kept. Reasoning is only ~15% of tokens; the rest is input, mostly the brief and the worker's own context. Not tested: other models, tasks big enough for several parallel workers.
+
+## Round 15-16: devin CLI, deepseek-v4-1-flash-1017-low, vague shop task, delegating via run_subagent
+
+Opencode providers were out of funds, so this round used devin. Its export counts the orchestrator only (workers not included); reasoning is trace chars/4. Fresh = prompt - cached + completion. Hidden tests: all runs passed.
+
+| variant | n | pass | orch fresh | reasoning | delegated | time s |
+|---|---|---|---|---|---|---|
+| original | 10 | 10/10 | 28.2k | 2.9k | 8/10 | 64 |
+| TD (previous `AGENTS.md`) | 10 | 10/10 | 22.4k | 2.5k | 4/10 | 36 |
+| V7: TD + thinking budget, no re-reads, test once, no scratch scripts, act when obvious | 20 | 20/20 | 23.4k | 2.6k | 16/20 | 46 |
+| W5: V7 + "verify once, do not re-read worker files" (now `AGENTS.md`) | 20 | 20/20 | 18.6k | 1.9k | 17/20 | 38 |
+
+Reading: TD is cheap but often skips the worker (4/10). W5 keeps the worker (17/20) and uses 17% fewer orchestrator tokens than TD, 21% fewer than V7. Lost: shorter brief (delegation 2/10), worker call cap (5/10), batch line (6/10). Worker tokens not measured; the 12k target is not reached.
