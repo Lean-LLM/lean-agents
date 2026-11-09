@@ -91,3 +91,15 @@ Same task, model and method as round 9. 9 sessions in parallel; failed provider 
 | T + Engineering section | 2 | 2/2 | 30.8k | 4.7k | 8.0k | 43.4k | 454k | 22 | 27 | 166 |
 
 Reading: the shipped prompt holds (24-25k, same as round 9, n=7 total). Each dropped section made the run use about 75-80% more fresh tokens, about 2x steps, and slower, with the same pass rate. Both stay out. Small n; ADHD spread is wide (±21k). Not tested: other models, bigger tasks.
+
+## Round 11: bigger task with exact spec (3 modules: LRU, CSV, semver)
+
+Same model and method. Spec is precise, 3 independent modules, hidden accept tests. 9 sessions in parallel.
+
+| variant | n | pass | in | out | reasoning | fresh | cache read | steps | tools | time s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| no prompt | 3 | 3/3 | 13.7k | 4.5k | 4.1k | 22.4k | 121k | 10 | 11 | 110 |
+| A (280B) | 3 | 3/3 | 14.0k | 3.7k | 3.2k | 20.8k | 84k | 7 | 9 | 93 |
+| T (shipped) | 3 | 3/3 | 14.6k | 5.3k | 3.5k | 23.3k | 129k | 10 | 10 | 84 |
+
+Reading: with an exact spec, all three are within noise (21-23k). No variant delegated. The savings in round 9 appear on vague tasks, where no prompt wanders and reasons more. Do not expect the same savings on tasks that spell out the steps.
