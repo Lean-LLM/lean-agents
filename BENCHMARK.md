@@ -103,3 +103,16 @@ Same model and method. Spec is precise, 3 independent modules, hidden accept tes
 | T (shipped) | 3 | 3/3 | 14.6k | 5.3k | 3.5k | 23.3k | 129k | 10 | 10 | 84 |
 
 Reading: with an exact spec, all three are within noise (21-23k). No variant delegated. The savings in round 9 appear on vague tasks, where no prompt wanders and reasons more. Do not expect the same savings on tasks that spell out the steps.
+
+## Round 12: is A really better than T?
+
+Same vague task, model and method as round 9. More runs of A, plus two new variants. Failed provider runs dropped (Y mostly failed, n=1, ignore).
+
+| variant | n | pass | fresh | reasoning | steps | time s |
+|---|---|---|---|---|---|---|
+| no prompt | 8 | 8/8 | 47.7k | 10.1k | 25 | 272 |
+| A (280B), now 11 runs | 11 | 11/11 | 25.2k ±12.5 | 5.7k | 13 | 113 |
+| T (shipped), 7 runs | 7 | 7/7 | ~25k ±5 | ~6k | 12 | ~128 |
+| U: A + questions line | 4 | 4/4 | 47.4k ±17.7 | 10.1k | 24 | 156 |
+
+Reading: A's earlier 19k was luck. At n=11 A equals T (about 25k). So T is not worse than A and keeps the routing and questions rules. U shows one extra line can wipe out the gain, so results move a lot with small wording changes and with run luck; any claim under n~10 is weak. We stop here: the shipped prompt is about 47% below no prompt (47.7k to ~25k) on vague tasks, no gain on exact-spec tasks, quality equal.
