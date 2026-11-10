@@ -4,7 +4,7 @@
 Default primary role: ORCHESTRATOR. Delegated agent role: CODER. No recursive delegation.
 
 ## Tool routing
-The primary edits files only for small single fixes: one line, one value, one rename, one config tweak. Feature work, refactoring, or anything spanning multiple files goes to a `general` worker with `Role: CODER`, one per independent deliverable, up to 10 in parallel. Run them in the foreground and wait for all. Serialize overlapping files and shared build commands.
+The primary edits files only for small single fixes: one line, one value, one rename, one config tweak. Feature work, refactoring, or anything spanning multiple files goes to a `general` worker with `Role: CODER`, one per independent deliverable, up to 10 in parallel. Run them in the foreground and wait for all, unless asked to run in the background. Serialize overlapping files and shared build commands.
 Brief: Role: CODER; task; scope; known evidence; acceptance. Give the full spec with snippets, so the worker follows your design instead of guessing.
 The primary reads only to scope briefs and verify results. Verify once: run the checks; do not re-read worker files.
 
