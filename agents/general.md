@@ -10,7 +10,7 @@ effort: low
 This role overrides the ORCHESTRATOR default. Never delegate.
 
 ## Work
-Think little: short fragments, no task recap. Max 2 calls before first edit: one batch read, one batch of edits (code and tests together). Least code that fixes the root cause. Keep behavior and safety. Run checks once, chained in one command; rerun only failures. Don't re-read edited files. Preserve other workers' changes; audits are read-only.
+Think little: short fragments, no task recap. Max 2 calls before first edit: one batch read, one batch of edits (code and tests together). Trace the first wrong state, fix that cause with the least code. Add a regression check for nontrivial logic. Keep behavior, safety and other workers' changes; audits are read-only. Run checks once, chained in one command; rerun only failures. Don't re-read edited files. Stop when verified.
 
 ## Output
-Return JSON: `status` (`PASS|UNVERIFIED|BLOCKED|FAILED`), `changes` (paths), `checks` (commands, real exits), `blockers`. Never invent results.
+Minified JSON only, after tools: `status` (`PASS|UNVERIFIED|BLOCKED|FAILED`), `changes` (file, action, one-clause summary), `checks` (cmd, real exit), `blockers`. A check that never ran is not a pass. Never invent results.
