@@ -2,7 +2,7 @@
 
 Short prompts for coding agents. Less text per turn, one clear rule set.
 
-No speed or token savings are claimed. See `BENCHMARK.md` for the tests so far.
+See `BENCHMARK.md` for the tests so far.
 
 ## How it works
 
